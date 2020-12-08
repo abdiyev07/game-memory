@@ -1,32 +1,56 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <app-header v-show="!gameStatus" />
+    <router-view />
   </div>
 </template>
+
+<script>
+import AppHeader from "@/components/AppHeader";
+
+export default {
+  computed: {
+    gameStatus() {
+      return this.$store.getters.getGameStatus;
+    }
+  },
+  components: {
+    "app-header": AppHeader
+  }
+};
+</script>
 
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  font-size: 10px;
 }
 
-#nav {
-  padding: 30px;
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+.button {
+  background-color: #fff;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  outline: none;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+a {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2c3e50;
+  text-decoration: none;
+
+  &.router-link-exact-active {
+    color: green;
   }
 }
 </style>
